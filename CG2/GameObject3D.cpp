@@ -21,7 +21,7 @@ void GameObject3D::Initialize() {
 	InitializeConstMapMaterial();
 
 	//ƒ[ƒ‹ƒh•ÏŠ·‚Ì‰Šú‰»
-	worldTransform_.Initialize();
+	worldTransform_.initialize();
 
 	//ƒ‚ƒfƒ‹‚Ì‰Šú‰»
 	model.LoadModel(modelFileName);

@@ -1,6 +1,6 @@
 #include "WorldTransform.h"
 
-void WorldTransform::Initialize() {
+void WorldTransform::initialize() {
 
 	scale_ = {1 , 1 , 1};
 	rotation_ = {0 , 0 , 0};
