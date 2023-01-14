@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Enemy.h"
 Player::Player()
 {
 
@@ -12,15 +13,25 @@ Player::~Player()
 void Player::Initialize(ViewProjection* viewProjection, Matrix4* matProjection)
 {
 	gameObject_ = new GameObject3D();
+	gameObject_->PreLoadModel("Resources/player/player.obj");
+	gameObject_->PreLoadTexture(L"Resources/player/cross.png");
 	gameObject_->SetMatProjection(matProjection);
 	gameObject_->SetViewProjection(viewProjection);
 	gameObject_->Initialize();
+	gameObject_->worldTransform_.scale_ = { 2,2,2 };
+	gameObject_->worldTransform_.translation_ = { 0,-5,0 };
+
+	collider_ = new Collider();
+	collider_->Initialize(&gameObject_->worldTransform_);
+	collider_->SetRadius(radius_);
 };
 
 void Player::Update()
 {
 	Move();
 	gameObject_->Update();
+	//“–‚½‚è”»’è
+	collider_->Update();
 };
 
 void Player::Draw()
@@ -31,7 +42,7 @@ void Player::Draw()
 void Player::Move()
 {
 	Vector3 move = { 0,0,0 };
-	const float kCharacterSpeed = 0.5f;
+	const float kCharacterSpeed = 0.2f;
 
 	//‰Ÿ‚µ‚½•ûŒü‚ÅˆÚ“®—Ê‚ð•Ï‰»
 	if (input.PushKey(DIK_RIGHT))
@@ -56,13 +67,33 @@ void Player::Move()
 	const float kMoveLimitX = 35.0f;
 	const float kMoveLimitY = 19.3f;
 
+	gameObject_->worldTransform_.rotation_ += move;
 	gameObject_->worldTransform_.translation_ += move;
-
+	//XV
+	gameObject_->Update();
+	//“–‚½‚è”»’è
+	collider_->Update();
 	//”ÍˆÍ‚ð’´‚¦‚È‚¢ˆ—
 	gameObject_->worldTransform_.translation_.x = max(gameObject_->worldTransform_.translation_.x, -kMoveLimitX);
 	gameObject_->worldTransform_.translation_.x = min(gameObject_->worldTransform_.translation_.x, +kMoveLimitX);
 	gameObject_->worldTransform_.translation_.y = max(gameObject_->worldTransform_.translation_.y, -kMoveLimitY);
 	gameObject_->worldTransform_.translation_.y = min(gameObject_->worldTransform_.translation_.y, +kMoveLimitY);
+
+	//“G‚Æ‚Ì“–‚½‚è”»’è
+	if (collider_->CheckCollision(*enemy_->GetCollider()))
+	{
+		isHit_ = true;
+	}
+	else
+	{
+		isHit_ = false;
+	}
+}
+
+void Player::Reset()
+{
+	gameObject_->worldTransform_.translation_ = { 0,-5,0 };
+	isHit_ = false;
 }
 
 Vector3 Player::GetWorldPosition()
@@ -78,7 +109,17 @@ Vector3 Player::GetWorldPosition()
 	return worldPos;
 }
 
+void Player::SetEnemy(Enemy* enemy)
+{
+	enemy_ = enemy;
+}
+
 float Player::GetRadius()
 {
-	return radius;
+	return radius_;
+}
+
+bool Player::GetIsHit()
+{
+	return isHit_;
 }

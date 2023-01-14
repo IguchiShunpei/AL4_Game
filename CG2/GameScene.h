@@ -12,7 +12,6 @@
 
 #include "Player.h"
 #include "Enemy.h"
-#include <list>
 
 class GameScene {
 
@@ -42,9 +41,26 @@ private: // メンバ変数
 
 	ViewProjection viewProjection_;
 
+	//シーン
+	enum class Scene
+	{
+		Title,
+		Explanation,
+		GameScene,
+		Clear,
+		GameOver,
+	};
+
+	Scene scene_ = Scene::Title;
+
 	//プレイヤー
 	Player* player_ = nullptr;
 	//敵
 	Enemy* enemy_ = nullptr;
-	
+	//画像
+	Sprite* title_ = nullptr;
+	Sprite* explanetion_ = nullptr;
+	Sprite* clear_ = nullptr;
+	Sprite* gameOver_ = nullptr;
+	Sprite* space_ = nullptr;
 };

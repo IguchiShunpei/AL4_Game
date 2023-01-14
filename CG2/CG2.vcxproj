@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="DX12base.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="FPS.cpp" />
@@ -197,6 +198,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Audio.h" />
+    <ClInclude Include="Collider.h" />
     <ClInclude Include="DX12base.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="ErrorException.h" />

@@ -75,6 +75,9 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Application\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Source\3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FPS.h">
@@ -139,6 +142,9 @@
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Application\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header\3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

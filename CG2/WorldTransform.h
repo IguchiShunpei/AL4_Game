@@ -6,7 +6,7 @@
 class WorldTransform {
 public:
 	//メンバ関数
-	void Initialize();
+	void initialize();
 
 	//ワールド変換行列の更新
 	void UpdateMatWorld();

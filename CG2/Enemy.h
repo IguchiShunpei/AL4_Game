@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject3D.h"
 #include "MathFunc.h"
-#include "Vector3.h"
+#include "Collider.h"
 
 class Player;
 
@@ -20,18 +20,25 @@ public:
 	//描画
 	void Draw();
 	//弾発射
-	void Fire();
+	void Move();
 	//playerのsetter
 	void SetPlayer(Player* player) { player_ = player; }
-
+	//リセット
+	void Reset();
+	
 	//ワールド座標を取得
 	Vector3 GetWorldPosition();
-
+	//colliderのsetter
+	void SetCollider(Collider* collider);
+	//colliderのgetter
+	Collider* GetCollider() { return collider_; };
+	//画面外に行ったか
+	bool GetIsPassed() { return isPassed_; };
 private:
 	//ワールドトランスフォーム
 	WorldTransform worldTransform_;
-
-	Vector3* vector3_ = nullptr;
+	//当たり判定
+	Collider* collider_ = nullptr;
 	//オブジェクト
 	GameObject3D* gameObject_ = nullptr;
 	//ゲームシーン
@@ -42,8 +49,10 @@ private:
 	float delayTimer = 0.0f;
 	//自キャラ
 	Player* player_ = nullptr;
+	//画面外に行ったか
+	bool isPassed_ = false;
 
 	//半径
-	float radius = 1.0f;
+	float radius_ = 1.0f;
 };
 
